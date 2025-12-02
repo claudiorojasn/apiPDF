@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API PDF - Cliente de Prueba</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { margin-bottom: 30px; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        div { margin-bottom: 10px; }
+        label { display: inline-block; width: 200px; }
+        input, select, button { padding: 5px; margin: 2px; }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        hr { margin: 40px 0; }
+    </style>
+</head>
+<body>
+    <h1>API para Trabajar con PDFs</h1>
+
+    <h2>Agregar Imagen a PDF Existente</h2>
+    <form action="/add-image" method="post" enctype="multipart/form-data">
+        <div><label>Archivo PDF:</label><input type="file" name="pdf_file" accept=".pdf" required></div>
+        <div><label>Archivo de imagen:</label><input type="file" name="image_file" accept="image/*" required></div>
+        <div><label>Coordenada X:</label><input type="number" name="x" value="100" required></div>
+        <div><label>Coordenada Y:</label><input type="number" name="y" value="100" required></div>
+        <div><label>Ancho (opcional):</label><input type="number" name="width"></div>
+        <div><label>Alto (opcional):</label><input type="number" name="height"></div>
+        <div><label>Número de página:</label><input type="number" name="page_number" value="1" min="1"></div>
+        <button type="submit">Procesar PDF</button>
+    </form>
+
+    <h2>Crear Nuevo PDF con Imagen</h2>
+    <form action="/create-pdf-with-image" method="post" enctype="multipart/form-data">
+        <div><label>Archivo de imagen:</label><input type="file" name="image_file" accept="image/*" required></div>
+        <div><label>Coordenada X:</label><input type="number" name="x" value="100"></div>
+        <div><label>Coordenada Y:</label><input type="number" name="y" value="100"></div>
+        <div><label>Ancho:</label><input type="number" name="width" value="100"></div>
+        <div><label>Alto:</label><input type="number" name="height" value="100"></div>
+        <div><label>Tamaño de página:</label>
+            <select name="page_size">
+                <option value="letter">Carta</option>
+                <option value="a4">A4</option>
+            </select>
+        </div>
+        <button type="submit">Crear PDF</button>
+    </form>
+
+    <h2>Firmar PDF con Certificado .pfx</h2>
+    <form action="/sign-pdf" method="post" enctype="multipart/form-data">
+        <div><label>Archivo PDF:</label><input type="file" name="pdf_file" accept=".pdf" required></div>
+        <div><label>Certificado .pfx/.p12:</label><input type="file" name="pfx_file" accept=".pfx,.p12" required></div>
+        <div><label>Contraseña del certificado:</label><input type="password" name="password" required></div>
+        <div><label>Razón de la firma:</label><input type="text" name="reason" value="Firma digital"></div>
+        <div><label>Ubicación:</label><input type="text" name="location" value=""></div>
+        <div><label>Página de la firma visible:</label><input type="number" name="page" value="1" min="1"></div>
+        <div><label>Posición X:</label><input type="number" name="x" value="100"></div>
+        <div><label>Posición Y:</label><input type="number" name="y" value="100"></div>
+        <div><label>Ancho firma:</label><input type="number" name="width" value="200"></div>
+        <div><label>Alto firma:</label><input type="number" name="height" value="100"></div>
+        <button type="submit">Firmar PDF</button>
+    </form>
+
+    <h2>Firma Invisible</h2>
+    <form action="/sign-pdf-invisible" method="post" enctype="multipart/form-data">
+        <div><label>Archivo PDF:</label><input type="file" name="pdf_file" accept=".pdf" required></div>
+        <div><label>Certificado .pfx/.p12:</label><input type="file" name="pfx_file" accept=".pfx,.p12" required></div>
+        <div><label>Contraseña del certificado:</label><input type="password" name="password" required></div>
+        <div><label>Razón de la firma:</label><input type="text" name="reason" value="Firma digital"></div>
+        <div><label>Ubicación:</label><input type="text" name="location" value=""></div>
+        <button type="submit">Firma Invisible</button>
+    </form>
+
+    <h2>Verificar Firmas</h2>
+    <form action="/verify-signature" method="post" enctype="multipart/form-data">
+        <div><label>Archivo PDF firmado:</label><input type="file" name="pdf_file" accept=".pdf" required></div>
+        <button type="submit">Verificar Firmas</button>
+    </form>
+
+    <h2>Extraer Texto de PDF</h2>
+    <form action="/extract-text" method="post" enctype="multipart/form-data">
+        <div><label>Archivo PDF:</label><input type="file" name="pdf_file" accept=".pdf" required></div>
+        <div><label>Páginas específicas (ej: 1,3,5):</label><input type="text" name="page_numbers" placeholder="Todas las páginas"></div>
+        <div><label><input type="checkbox" name="include_metadata" value="true"> Incluir metadatos</label></div>
+        <div><label><input type="checkbox" name="extract_tables" value="true"> Extraer tablas</label></div>
+        <div><label>Estrategia:</label>
+            <select name="strategy">
+                <option value="auto">Automática</option>
+                <option value="pdfminer">Solo PDFMiner</option>
+            </select>
+        </div>
+        <button type="submit">Extraer Texto</button>
+    </form>
+
+    <h2>Información de Páginas</h2>
+    <form action="/extract-pages-info" method="post" enctype="multipart/form-data">
+        <div><label>Archivo PDF:</label><input type="file" name="pdf_file" accept=".pdf" required></div>
+        <button type="submit">Obtener Información</button>
+    </form>
+
+    <h2>Buscar en PDF</h2>
+    <form action="/search-text" method="post" enctype="multipart/form-data">
+        <div><label>Archivo PDF:</label><input type="file" name="pdf_file" accept=".pdf" required></div>
+        <div><label>Término de búsqueda:</label><input type="text" name="search_term" required></div>
+        <div><label><input type="checkbox" name="case_sensitive" value="true"> Sensible a mayúsculas/minúsculas</label></div>
+        <div><label><input type="checkbox" name="whole_word" value="true"> Palabra completa</label></div>
+        <button type="submit">Buscar</button>
+    </form>
+</body>
+</html>

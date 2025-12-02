@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Dependencias
+node_modules/
+.pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Entornos de Python
+.python-version
+
+# Entornos virtuales
+.venv
+venv/
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Archivos de log
+*.log
+logs/
+
+# Archivos de upload (no subir datos)
+uploads/
+output/
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.pfx
+*.p12
+
+# Archivos de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker
+docker-compose.override.yml
+
+# Archivos compilados
+dist/
+build/
+*.egg-info/
