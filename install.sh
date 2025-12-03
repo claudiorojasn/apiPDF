@@ -32,7 +32,7 @@ sudo -u pdfapi python3 -m venv venv
 # 6. Copiar archivos (debes tenerlos en el mismo directorio que este script)
 echo "📄 Copiando archivos..."
 # Aquí copiarías tus archivos o clonarías desde Git
-# sudo -u pdfapi git clone https://github.com/tu-usuario/apiPDF.git .
+sudo -u pdfapi git clone https://github.com/tu-usuario/apiPDF.git .
 
 # 7. Instalar dependencias Python
 echo "📦 Instalando dependencias Python..."
